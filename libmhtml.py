@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-15 -*-
 
-# Copyright (c) 2011, Chema Gonzalez (chema@cs.berkeley.edu)
+# Copyright (c) 2011, Chema Gonzalez (chema@cal.berkeley.edu)
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -88,6 +88,7 @@ def q_encode(s, enc):
 
 
 
+# \note This should be easier ( https://github.com/ahupp/python-magic )
 def magic2mime(t):
 	if 'GIF image data' in t: return 'image/gif';
 	elif 'PNG image data' in t: return 'image/png';
@@ -115,13 +116,14 @@ Content-Type: multipart/related;
 
 
 def add_part(ptype, boundary, content_type, url, contents):
-	# add main file
+	# add part header
 	out = """\n--%s
 Content-Type: %s
 Content-Transfer-Encoding: %s
 Content-Location: %s
 
 """ % (boundary, content_type, ptype, url);
+	# add part body
 	if ptype == 'quoted-printable':
 		out += quopri.encodestring(contents);
 	elif ptype == 'base64':
@@ -149,6 +151,15 @@ def get_html_url(vals, url):
 
 
 
+
+# \brief Get an URL and MHTML'ize it
+# 
+# Gets an URL, parse it, and then gets the linked images ('<img src=...>')
+# and links ('<link .*href=...>'). Bundles everything into an MHTML file
+# 
+# \param[in,out] name Description
+# \param[in] name Description
+# \retval type (None) Error code (0 if OK, <0 if problems)
 def get_url(vals, url):
 	# get main page
 	(res, main_page) = get_html_url(vals, url);
@@ -295,6 +306,7 @@ def get_html(url):
 #
 # \param[in] url URL to get
 # \retval (error code, contents|error message)
+# \sa get_url()
 def get(url):
 	# use default vals
 	vals = copy.deepcopy(default);
