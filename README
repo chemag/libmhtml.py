@@ -1,7 +1,8 @@
 
 = [libmhtml.py]
 
-	- a python module implementing an MHTML creator/parser
+	- intro
+		- a python module implementing an MHTML creator/parser
 
 	- interesting functions
 		- libmhtml.get(url)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-15 -*-
 
-# Copyright (c) 2011, Jose Maria Gonzalez (chema@cs.berkeley.edu)
+# Copyright (c) 2011, Chema Gonzalez (chema@cs.berkeley.edu)
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -30,8 +30,25 @@
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+"""
+- intro
+	- a python module implementing an MHTML creator/parser
 
-# an mhtlm library
+- interesting functions
+	- libmhtml.get(url)
+	- libmhtml.parse(contents)
+
+- usage
+	- get an URL and MTHML'ize it
+		> ./libmhtml.py http://www.nytimes.com /tmp/nytimes.mht
+	- get an MHTML file and convert it into different files
+		> mkdir /tmp/ex
+		> ./libmhtml.py -p /tmp/nytimes.mht /tmp/ex/
+
+"""
+
+__version__ = '0.0.1';
+
 
 import sys;
 import os;
